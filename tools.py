@@ -11,18 +11,18 @@ load_dotenv()
 
 tavily = TavilyClient(os.getenv("TAVILY_API_KEY"))
 
-# @tool
-# def web_search(query : str) -> str:
-#     """Search the web for recent and reliable information on a topic . Returns Titles , URLs and snippets."""
-#     result = tavily.search(query=query, max_results=5)
+@tool
+def web_search(query : str) -> str:
+    """Search the web for recent and reliable information on a topic . Returns Titles , URLs and snippets."""
+    result = tavily.search(query=query, max_results=5)
 
-#     out = []
+    out = []
 
-#     for r in result["results"]:
-#         out.append(
-#             f"title : {r["title"]}\nurl : {r["url"]}\ncontent : {r["content"][:350]}"
-#         )
-#     return "/n----/n".join(out)
+    for r in result["results"]:
+        out.append(
+            f"title : {r["title"]}\nurl : {r["url"]}\ncontent : {r["content"][:350]}"
+        )
+    return "/n----/n".join(out)
 
 @tool
 def web_scrap(url : str):
