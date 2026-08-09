@@ -20,6 +20,9 @@
 - ```bash
    git clone https://github.com/CoderBhavik/Expense_Tracker_App_Console_Based.git](https://github.com/CoderBhavik/AI-RESEARHER-AGENT.git
 
+3. for local Run:
+- ```bash
+    python -m main.py
 
 ## Project structure :-
 ```text
