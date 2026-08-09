@@ -17,7 +17,8 @@
     - using uv venv
 
 2. Clone git repo:
-- git clone https://github.com/CoderBhavik/AI-RESEARHER-AGENT.git
+- ```bash
+   git clone https://github.com/CoderBhavik/Expense_Tracker_App_Console_Based.git](https://github.com/CoderBhavik/AI-RESEARHER-AGENT.git
 
 
 ## Project structure :-
