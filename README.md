@@ -22,7 +22,8 @@
 
 
 ## Project structure :-
-AI-RESEARCH-AGENT
+```text
+AI-RESEARCH-AGENT/
 ├── __init__.py
 ├── main.py
 ├── __pycache__
