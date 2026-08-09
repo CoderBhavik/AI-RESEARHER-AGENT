@@ -22,7 +22,7 @@
 
 3. for local Run:
 - ```bash
-    python -m main.py
+    python -m main
 
 ## Project structure :-
 ```text
