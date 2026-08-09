@@ -65,6 +65,7 @@ AI-RESEARCH-AGENT/
 │   │   └── ui_helpers.cpython-313.pyc
 │   └── ui_helpers.py
 └── uv.lock
+```
 
 # Author
 
