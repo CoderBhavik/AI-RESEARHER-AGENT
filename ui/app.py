@@ -20,7 +20,7 @@ import traceback
 import streamlit as st
 
 import ui_helpers as ui
-from pipeline import research_agent  # <-- the one backend entry point the UI calls
+from research.pipeline.pipeline import research_agent  # <-- the one backend entry point the UI calls
 
 # ---------------------------------------------------------------------------
 # Page setup
@@ -123,7 +123,7 @@ if run_clicked:
         start = time.time()
         try:
             with st.spinner("Running the research pipeline..."):
-                state = research_agent(topic.strip(), on_progress=on_progress)
+                state = research_agent(topic.strip(), on_progress=on_progress, max_results=settings["max_results"], max_pages=settings["max_pages"])
             st.session_state.result = state
             status_slot.empty()
             st.success("Research complete.")

@@ -1,26 +1,7 @@
-from agents import writer_chain, critic_chain
-from tools import web_scrape, web_search
+from research.agents.agents import writer_chain, critic_chain
+from research.tools.tools import web_scrape, web_search
 from rich import print
 
-# --------------------------------------------------------------------------
-# NOTE ON CHANGES (for the web UI integration):
-#
-# 1. Fixed a pre-existing syntax issue: the original f-strings used the same
-#    quote character (") both to open the f-string and to index into the
-#    `state` dict (state["search_result"]). That only parses on Python 3.12+
-#    (PEP 701). Switched the inner quotes to single quotes so this runs on
-#    any modern Python version.
-#
-# 2. Added an OPTIONAL `on_progress` callback parameter. It defaults to
-#    `None`, so every existing caller (e.g. `python pipeline.py` from the
-#    terminal) behaves exactly as before. When provided, it is called with a
-#    short stage key ("search", "scrape", "write", "critic", "done") right
-#    before that stage starts, so a UI (like the Streamlit app) can render a
-#    live progress timeline without needing to know anything about the
-#    research logic itself.
-#
-# No agent/tool/prompt logic was touched.
-# --------------------------------------------------------------------------
 
 
 def _noop(_stage: str) -> None:
@@ -28,7 +9,7 @@ def _noop(_stage: str) -> None:
     pass
 
 
-def research_agent(topic: str, on_progress=None) -> dict:
+def research_agent(topic: str, on_progress=None, max_results:int = 5, max_pages : int = 5) -> dict:
     if on_progress is None:
         on_progress = _noop
 
@@ -41,7 +22,8 @@ def research_agent(topic: str, on_progress=None) -> dict:
     print(" =" * 50)
 
     search_result = web_search.invoke({
-        "query": topic
+        "query": topic,
+        "max_results" : max_results
     })
     state["search_result"] = search_result
 
@@ -53,7 +35,7 @@ def research_agent(topic: str, on_progress=None) -> dict:
 
     scrape_result = []
 
-    for result in search_result:
+    for result in search_result[:max_pages]:
         scrape_result.append(
             web_scrape.invoke({
                 "url": result["url"]

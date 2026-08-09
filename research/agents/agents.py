@@ -1,16 +1,16 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain.agents import create_agent
 from langchain_sarvam import ChatSarvam
-from tools import web_search
-import os
+
 load_dotenv()
 
 
 model = ChatSarvam(model="sarvam-105b",
                    reasoning_effort="low",
-                   max_tokens=4096
+                   max_tokens=4096,
+                   max_retries=0,
+                   timeout=120
                    )
 
 

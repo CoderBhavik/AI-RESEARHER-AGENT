@@ -7,14 +7,15 @@ import requests
 from rich import print
 from tavily import TavilyClient
 
+
 load_dotenv()
 
 tavily = TavilyClient(os.getenv("TAVILY_API_KEY"))
 
 @tool
-def web_search(query : str) -> list:
+def web_search(query : str, max_results : int = 5) -> list:
     """Search the web for recent and reliable information on a topic . Returns Titles , URLs and snippets."""
-    result = tavily.search(query=query, max_results=5)
+    result = tavily.search(query=query, max_results=max_results)
 
     return result["results"]
 
